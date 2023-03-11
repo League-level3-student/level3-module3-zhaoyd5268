@@ -1,6 +1,8 @@
 package _00_Intro_To_String_Methods;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 
 /*
  * Visit the JavaDocs for the String class to view everything you can do with a String.
@@ -34,21 +36,47 @@ public class _01_StringMethods {
 
     // Given Strings s1 and s2, return the longer String
     public static String longerString(String s1, String s2) {
-        return null;
+       int l1 = s1.length();
+       int l2 = s2.length();
+       if (l1>l2) {
+    	   return s1;
+       } else {
+    	   return s2;
+       }
     }
 
     // If String s contains the word "underscores", change all of the spaces
     // to underscores
     public static String formatSpaces(String s) {
-        return null;
-    }
+    	String news = s;
+    	if (s.contains("underscores")) {
+    		for(int i = 0; i < s.length(); i++) {
+    		news = s.replace(" ","_");
+    	}
+    	}
+
+    	return news;
+	}
 
     // Return the name of the person whose LAST name would appear first if they
     // were in alphabetical order.
     // You cannot assume there are no extra spaces around the name, but you can
     // assume there is only one space between the first and last name
     public static String lineLeader(String s1, String s2, String s3) {
-        return null;
+    		String newS1 = s1.trim();
+    		String newS2 = s2.trim();
+    		String newS3 = s3.trim();
+    		Character c1 = newS1.charAt(newS1.length()-1);
+    		Character c2 = newS2.charAt(newS2.length()-1);
+    		Character c3 = newS3.charAt(newS3.length()-1);
+    		if (c1.compareTo(c2) < 0 && c1.compareTo(c3) < 0) {
+    			return newS1;
+    		} else if (c2.compareTo(c1) < 0 && c2.compareTo(c3) < 0) {
+    			return newS2;
+    		} else { 
+    			return newS3;
+    		}
+    	
     }
 
     // Return the sum of all numerical digits in the String
@@ -94,20 +122,20 @@ public class _01_StringMethods {
 }
 
 class Utilities {
-    // This basic encryption scheme is called single-byte xor. It takes a
-    // single byte and uses exclusive-or on every character in the String.
-    public static String encrypt(byte[] plaintext, byte key) {
-        for (int i = 0; i < plaintext.length; i++) {
-            plaintext[i] = (byte) (plaintext[i] ^ key);
-        }
-        return Base64.getEncoder().encodeToString(plaintext);
-    }
+	// This basic encryption scheme is called single-byte xor. It takes a
+	// single byte and uses exclusive-or on every character in the String.
+	public static String encrypt(byte[] plaintext, byte key) {
+		for (int i = 0; i < plaintext.length; i++) {
+			plaintext[i] = (byte) (plaintext[i] ^ key);
+		}
+		return Base64.getEncoder().encodeToString(plaintext);
+	}
 
-    public static String decrypt(String cyphertext, byte key) {
-        byte[] b = Base64.getDecoder().decode(cyphertext);
-        for (int i = 0; i < b.length; i++) {
-            b[i] = (byte) (b[i] ^ key);
-        }
-        return new String(b);
-    }
+	public static String decrypt(String cyphertext, byte key) {
+		byte[] b = Base64.getDecoder().decode(cyphertext);
+		for (int i = 0; i < b.length; i++) {
+			b[i] = (byte) (b[i] ^ key);
+		}
+		return new String(b);
+	}
 }
