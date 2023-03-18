@@ -3,24 +3,48 @@ package _02_The_Wave;
 import java.util.ArrayList;
 
 public class _01_TheWave {
-    /*
-     * Background:
-     * https://en.wikipedia.org/wiki/Wave_%28audience%29 
-     * 
-     * Task:
-     * Your task is to create a function that turns a string into a Wave.
-     * You will be passed a string and you must return that string in an
-     * ArrayList where an uppercase letter is a person standing up.
-     * Example:
-     * wave("hello") => "Hello", "hEllo", "heLlo", "helLo", "hellO"
-     * 
-     * 1. The input string will always be lower case but maybe empty.
-     * 2. If the character in the string is whitespace then pass over it as
-     *    if it was an empty seat.
-     */
-    
-    public static ArrayList<String> wave(String str) {
-        
-        return null;
-    }
+	/*
+	 * Background: https://en.wikipedia.org/wiki/Wave_%28audience%29
+	 * 
+	 * Task: Your task is to create a function that turns a string into a Wave. You
+	 * will be passed a string and you must return that string in an ArrayList where
+	 * an uppercase letter is a person standing up. Example: wave("hello") =>
+	 * "Hello", "hEllo", "heLlo", "helLo", "hellO"
+	 * 
+	 * 1. The input string will always be lower case but maybe empty. 2. If the
+	 * character in the string is whitespace then pass over it as if it was an empty
+	 * seat.
+	 */
+
+	public static ArrayList<String> wave(String str) {
+		ArrayList<StringBuilder> list = new ArrayList<StringBuilder>();
+		ArrayList<String> returnThis = new ArrayList<String>();
+		int b = 0;
+		int o = 0;
+		for (int i = 0; i < str.length(); i++) {
+			StringBuilder string = new StringBuilder(str);
+			string.trimToSize();
+			list.add(string);
+		}
+		for (int j = 0; j < str.length(); j++) {
+			Character insertThis = list.get(j).charAt(b);
+			if (insertThis.equals(' ')) {
+				list.remove(b);
+
+			} else {
+				insertThis = Character.toUpperCase(insertThis);
+				list.get(o).delete(o, b + 1);
+				list.get(o).insert(b, insertThis);
+				b+=1;
+				o+=1;
+			}
+			
+		
+		}
+		for (int k = 0; k < list.size(); k++) {
+			returnThis.add(list.get(k).toString());
+		}
+		System.out.println(list);
+		return returnThis;
+	}
 }

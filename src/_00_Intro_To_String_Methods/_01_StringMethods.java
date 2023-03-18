@@ -81,43 +81,97 @@ public class _01_StringMethods {
 
     // Return the sum of all numerical digits in the String
     public static int numeralSum(String s) {
-        return 0;
+      int sum = 0;
+      Character character;
+      for(int i = 0; i < s.length(); i++) {
+      character = s.charAt(i);
+      if (Character.isDigit(character)) {
+    	 int number = Integer.parseInt(character+"");
+    	 sum = sum+number;
+      }
+      }
+    	return sum;
     }
 
     // Return the number of times String substring appears in String s
     public static int substringCount(String s, String substring) {
-        return 0;
+        int num = 0;
+        int index = s.indexOf(substring);
+        while (index!=-1) {
+        	num++;
+        	index = s.indexOf(substring, index + substring.length());
+        	
+        }
+    	
+    	
+    	return num;
     }
 
     // Call Utilities.encrypt at the bottom of this file to encrypt String s
     public static String encrypt(String s, char key) {
-        return null;
+    	String encrypted = Utilities.encrypt(s.getBytes(), (byte) key);
+    	return encrypted;
     }
 
     // Call Utilities.decrypt at the bottom of this file to decrypt the
     // cyphertext (encrypted text)
     public static String decrypt(String s, char key) {
-        return null;
+    	String decrypted = Utilities.decrypt(s, (byte) key);
+    	return decrypted;
     }
 
     // Return the number of words in String s that end with String substring
     // You can assume there are no punctuation marks between words
     public static int wordsEndsWithSubstring(String s, String substring) {
-        return 0;
+    	int num = 0;
+    	String[] words = s.split(" ");
+    	for(int i = 0; i < words.length; i++) {
+    		if (words[i].endsWith(substring)) {
+    			num+=1;
+    		}
+    	}
+    	return num;
     }
 
     // Given String s, return the number of characters between the first
     // occurrence of String substring and the final occurrence
     // You can assume that substring will appear at least twice
     public static int distance(String s, String substring) {
-        return 0;
+    	System.out.println(s);
+    	System.out.println(substring);
+    	int start = s.indexOf(substring) + substring.length();
+    	System.out.println(start);
+    	int end = s.lastIndexOf(substring);
+    	System.out.println(end);
+        int num = end-start;
+    	return num;
     }
 
     // Return true if String s is a palindrome
     // palindromes are words or phrases are read the same forward as backward.
     // HINT: ignore/remove all punctuation and spaces in the String
     public static boolean palindrome(String s) {
-        return true;
+        
+    	String newS = s;
+    	newS = newS.replace(" ", "");
+    	newS = newS.replace(".", "");
+    	newS = newS.replace("?", "");
+    	newS = newS.replace("-", "");
+    	newS = newS.replace(",", "");
+    	newS = newS.replace(":", "");
+    	String backwardS = "";
+    	
+    	for(int i = newS.length()-1; i > -1; i--) {
+    		backwardS+=newS.charAt(i);
+    	}
+    	System.out.println(backwardS);
+    	System.out.println(newS);
+    	if (backwardS.equalsIgnoreCase(newS)) {
+    		return true;
+    	} else {
+    		return false;	
+    	}
+    	
     }
 }
 
