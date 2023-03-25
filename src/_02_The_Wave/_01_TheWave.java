@@ -16,35 +16,33 @@ public class _01_TheWave {
 	 * seat.
 	 */
 
-	public static ArrayList<String> wave(String str) {
-		ArrayList<StringBuilder> list = new ArrayList<StringBuilder>();
-		ArrayList<String> returnThis = new ArrayList<String>();
-		int b = 0;
-		int o = 0;
-		for (int i = 0; i < str.length(); i++) {
-			StringBuilder string = new StringBuilder(str);
-			string.trimToSize();
-			list.add(string);
-		}
-		for (int j = 0; j < str.length(); j++) {
-			Character insertThis = list.get(j).charAt(b);
-			if (insertThis.equals(' ')) {
-				list.remove(b);
 
-			} else {
-				insertThis = Character.toUpperCase(insertThis);
-				list.get(o).delete(o, b + 1);
-				list.get(o).insert(b, insertThis);
-				b+=1;
-				o+=1;
-			}
-			
+	public static ArrayList<String> wave(String str) {
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> returnThis = new ArrayList<String>();
 		
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) != ' ') {
+				list.add(str);
+			}
 		}
-		for (int k = 0; k < list.size(); k++) {
-			returnThis.add(list.get(k).toString());
+		int index = 0;
+		for(String t: list) {
+			for (int i = index; i < t.length(); i++) {
+				if (str.charAt(i) != ' ') {
+					index = i;
+					String notT = t.substring(0, index);
+					String alsoNotT = t.substring(index+1);
+					char letter = t.charAt(index);
+					letter = Character.toUpperCase(letter);
+					t = notT+letter+alsoNotT;
+					returnThis.add(t);
+					index+=1;
+					break;
+				}
+				
+			}
 		}
-		System.out.println(list);
 		return returnThis;
 	}
 }
